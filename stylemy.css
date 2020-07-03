@@ -1,0 +1,262 @@
+    .history_card {
+        height: calc(100vh - 147px);
+        position: relative;
+        /* margin-right: 30px; */
+    }
+    
+    body {
+        background-color: #d220ab03;
+    }
+    
+    .history {
+        /* height: calc(100% - (71px +76px)); */
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+        position: absolute;
+        padding-right: 40px;
+    }
+    
+    .message {
+        /* width: 50%; */
+        /* text-indent: 2em; */
+    }
+    
+    div {
+        /* border: 1px solid black; */
+    }
+    
+    li.shadow {
+        /* margin-right: 40px; */
+        border: 1px solid #4a3e2747;
+    }
+    
+    .message_item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 20px;
+    }
+    
+    .date_message {
+        display: flex;
+        min-width: 140px;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        /* justify-content: space-between; */
+    }
+    
+    .status_message {
+        display: flex;
+        min-width: 100px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    li {
+        list-style-type: none;
+    }
+    
+    .send {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 8px;
+    }
+    
+    .text {
+        display: flex;
+        justify-content: center;
+        font-size: 14px;
+        position: relative;
+        width: 100%;
+    }
+    
+    textarea {
+        width: 100%;
+        height: 100px;
+        background-color: #f2edf3;
+    }
+    
+    hr {
+        height: 2px;
+        border-top: 1px solid rgba(0, 0, 0, 0.308);
+    }
+    
+    .color {
+        color: #b66dff !important;
+    }
+    
+    .smile {
+        font-size: 24px;
+    }
+    
+    .smile_send {
+        position: absolute;
+        right: 0;
+    }
+    
+    .edit_commands {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        /* border: 1px solid #0000005e; */
+        border-radius: 5px;
+        background-color: #f2edf3;
+    }
+    
+    input.command {
+        width: 100%;
+        margin: 0px;
+        border: 1px solid #0000005e;
+    }
+    
+    .command {
+        min-width: 100px;
+        margin: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: inherit;
+        background-color: #d220ab00;
+        line-height: 1;
+        /* border: 1px solid #0000005e; */
+    }
+    
+    .material_border {
+        border-bottom-style: solid;
+        border-top-style: none !important;
+        border-right-style: none !important;
+        border-left-style: none !important;
+        border-color: #0000005e;
+    }
+    
+    .button {
+        margin: 30px;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .button_edit {
+        margin: 70px;
+    }
+    
+    .list_commands {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .text_send {
+        border: 1px solid black;
+    }
+    
+    li {
+        width: 100%;
+    }
+    
+    .form-check {
+        margin-left: 70px;
+    }
+    
+    .save_commands {
+        width: 100%;
+        padding: 10px;
+        margin: 0;
+        font-size: 1rem;
+        align-items: center;
+        height: calc(100vh - 208px);
+        overflow-y: auto !important;
+    }
+    
+    .save:before {
+        /* content: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quasi soluta dolor blanditiis eligendi necessitatibus in aut magnam officia repellat!"; */
+    }
+    
+    .save {
+        width: 100%;
+        height: 100px;
+    }
+    
+    .no_border {
+        border: none !important;
+    }
+    
+    .btn_edit {
+        margin-bottom: 10px;
+        width: 188px;
+    }
+    
+    .sidebar,
+    .main-panel {
+        min-height: 0px !important;
+    }
+    
+    .page-body-wrapper {
+        min-height: calc(100vh - 146px);
+    }
+    
+    .mb-5,
+    .my-5 {
+        margin-bottom: 10px !important;
+    }
+    
+    .add_command {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 10px 0;
+        padding-right: 10px;
+        background: #f2edf3;
+        border-bottom: 1px solid #b7aeb9;
+    }
+    
+    .title_menedger_command {
+        font-size: 24px;
+        margin-left: 10px;
+    }
+    
+    .background_color {
+        background: #f2edf3 !important;
+    }
+    
+    .active {
+        background: #f2edf3 !important;
+    }
+    
+    .nav-profile,
+    .nav_item .active {
+        background: #f2edf3 !important;
+    }
+    
+    .add {
+        width: 820px;
+        height: 300px;
+        background-color: blanchedalmond;
+        display: none;
+    }
+    
+    .visible {
+        display: inline;
+        position: fixed;
+        top: calc(50% - 150px);
+        bottom: 50%;
+        right: 50%;
+        left: calc(50% - 280px);
+        z-index: 1000;
+    }
+    
+    .modal-dialog {
+        max-width: 820px;
+        margin: 30px auto;
+    }
+    
+    .save_text {
+        background-color: white;
+    }

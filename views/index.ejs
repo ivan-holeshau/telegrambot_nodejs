@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <title>Purple Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/stylemy.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+</head>
+
+<body>
+
+    <div id="smiles" class="smiles invisible">
+        <!-- <svg width="214" height="164">
+        <rect x="4" y="4" rx="20" ry="20" width="200" height="150" style="fill:red;stroke:black;stroke-width:5;opacity:0.5" />
+        
+        </svg> -->
+
+
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Добавление команды</h5>
+                    <h3 class="error"></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <div class="edit_commands">
+                        <div class="command">
+                            <input id="commandAdd" type="text" class="command material_border" placeholder="command">
+                        </div>
+                        <div class="send">
+                            <div class="text">
+                                <p id="error" class="error invisible"> Ошибка. Проверьте возможно команда существует</p>
+                                <textarea id="idTextAddCommand" class="material_border" placeholder="Write a message..."></textarea>
+                                <div class="smile_send">
+                                    <a id="idSmileAddCommand" class="mdi mdi-panda menu-icon color smile" onmouseout="hideSmile(this)" onmouseover="showSmile(this)"><i class="icon icon-emoji"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button id="addCommand" type="button" class="btn btn-primary">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- modal-->
+    <div class="container">
+
+
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper ">
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar  " id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item nav-profile">
+                        <a href="#" class="nav-link">
+                            <div class="nav-profile-image">
+                                <img src="assets/images/faces/face1.jpeg" alt="profile">
+                                <span class="login-status online"></span>
+                                <!--change to offline or busy as needed-->
+                            </div>
+                            <div class="nav-profile-text d-flex flex-column">
+                                <span class="font-weight-bold mb-2">Kivi Ride</span>
+                                <span class="text-secondary text-small">Manager</span>
+                            </div>
+                            <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index">
+                            <span class="menu-title">Комманды бота</span>
+                            <i class="mdi mdi-settings-box menu-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item color_fon ">
+                        <a class="nav-link" href="send">
+                            <span class="menu-title">Рассылка</span>
+                            <i class="mdi mdi-send menu-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item color_fon ">
+                        <a class="nav-link" href="usersActive">
+                            <span class="menu-title">Пользователели</span>
+                            <i class="mdi  mdi-nature menu-icon"></i>
+
+
+                        </a>
+                    </li>
+
+
+
+                </ul>
+            </nav>
+            <!-- partial -->
+
+
+
+
+
+
+
+            <div class="history_card">
+
+                <div class="add_command">
+                    <div class="title_menedger_command">Менеджер команд</div>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                Добавить
+                                </button>
+                </div>
+
+
+
+
+                <ul id="save_commands" class="save_commands">
+
+
+
+
+
+
+
+                </ul>
+
+
+
+
+            </div>
+
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+
+            <!-- partial -->
+
+            <!-- main-panel ends -->
+        </div>
+
+        <!-- <footer class="footer ">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
+            </div>
+        </footer> -->
+
+
+
+
+
+
+        <!-- page-body-wrapper ends -->
+
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="assets/js/script.js"></script>
+        <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <script src="assets/vendors/chart.js/Chart.min.js"></script>
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script src="assets/js/off-canvas.js"></script>
+        <script src="assets/js/hoverable-collapse.js"></script>
+        <script src="assets/js/misc.js"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page -->
+        <script src="assets/js/dashboard.js"></script>
+        <script src="assets/js/todolist.js"></script>
+        <!-- End custom js for this page -->
+    </div>
+</body>
+
+</html>
