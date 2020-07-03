@@ -21,7 +21,7 @@ async function getCommands() {
 }
 
 async function sendButtonLink(message) {
-    console.log(await finedText('$$site') + " " + await finedText('$$mobile'))
+    // console.log(await finedText('$$site') + " " + await finedText('$$mobile'))
     var options = {
         reply_markup: {
             inline_keyboard: [
@@ -35,7 +35,7 @@ async function sendButtonLink(message) {
 }
 
 bot.on('callback_query', async function onCallbackQuery(callbackQuery) {
-    console.log(callbackQuery.data)
+    // console.log(callbackQuery.data)
     if (callbackQuery.data == 'mobile') {
         let text = await finedText('$$mobile');
         bot.sendMessage(callbackQuery.message.chat.id, text, { disable_web_page_preview: true });
@@ -62,12 +62,12 @@ bot.on('callback_query', async function onCallbackQuery(callbackQuery) {
                 ]
             }
         }
-        bot.sendMessage(callbackQuery.message.chat.id, text, { disable_web_page_preview: false });
+        bot.sendMessage(callbackQuery.message.chat.id, text, { disable_web_page_preview: true });
         text = await finedText('$$mobile');
-        bot.sendMessage(callbackQuery.message.chat.id, text, { disable_web_page_preview: false });
+        bot.sendMessage(callbackQuery.message.chat.id, text, { disable_web_page_preview: true });
 
         var options = {
-            disable_web_page_preview: false,
+            disable_web_page_preview: true,
             reply_markup: {
                 inline_keyboard: [
                     [{ text: await finedText('$yes'), callback_data: `mobile` }],
@@ -85,7 +85,7 @@ bot.on('callback_query', async function onCallbackQuery(callbackQuery) {
     if (callbackQuery.data == 'know') {
 
         var options = {
-            disable_web_page_preview: false,
+            disable_web_page_preview: true,
             // reply_markup: {
             //     inline_keyboard: [
             //         [{ text: await finedText('$yes'), callback_data: `mobile` }],
@@ -96,6 +96,7 @@ bot.on('callback_query', async function onCallbackQuery(callbackQuery) {
 
         // bot.sendMessage(callbackQuery.message.chat.id, await finedText('$youhave'), options);
         bot.sendMessage(callbackQuery.message.chat.id, await finedText('$soclink'), options);
+        bot.sendMessage(callbackQuery.message.chat.id, await finedText('$all'), options);
     }
 });
 
@@ -104,15 +105,15 @@ async function games(message) {
 
     //  console.log(await finedText('$$site') + " " + await finedText('$$mobile'))
     var options = {
-        disable_web_page_preview: true,
-        reply_markup: {
-            inline_keyboard: [
-                [{ text: await finedText('$dontknow'), callback_data: `dont_know` }],
-                [{ text: await finedText('$know'), callback_data: `know` }],
-            ]
+            disable_web_page_preview: true,
+            reply_markup: {
+                inline_keyboard: [
+                    [{ text: await finedText('$dontknow'), callback_data: `dont_know` }],
+                    [{ text: await finedText('$know'), callback_data: `know` }],
+                ]
+            }
         }
-    }
-    console.log(await finedText('$dontknow') + 'commands')
+        //console.log(await finedText('$dontknow') + 'commands')
     bot.sendMessage(message.chat.id, await finedText('$knowservice'), options);
 
 
@@ -129,7 +130,7 @@ async function finedText(text) {
     });
 
     list_commands.forEach(element => {
-        console.log('commands[]' + element.id)
+        //console.log('commands[]' + element.id)
         if (element.id == text) {
             text_answer = element.text;
         }
@@ -142,13 +143,14 @@ var answerCallbacks = {};
 
 
 async function addUser(user) {
-    console.log(user.id + " " + user.name + " " + user.phone)
+    // console.log(user.id + " " + user.name + " " + user.phone)
     try {
         await Users.create({
             id: user.id,
             name: user.name,
             phone: user.phone,
-            date: new Date().toISOString().slice(0, 19).replace('T', ' ')
+            date: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            active: 0
         });
     } catch {
         Users.update({ name: user.name, phone: user.phone }, {
@@ -163,14 +165,31 @@ async function addUser(user) {
 function checkphone(answer) {
 
     var phone = answer.text;
-    console.log(phone)
+    //console.log(phone);
+}
 
+let deleteSessions = () => {
+    let deleteIndex = [];
+    for (let i in answerCallbacks) {
+        let date = new Date();
+        // console.log(i + ' date ' + answerCallbacks[i].date);
+        if ((date - answerCallbacks[i].date) > 120000) {
+            deleteIndex.push(i);
+        }
+    }
+    deleteIndex.forEach(index => {
+        delete answerCallbacks[index];
+    })
 }
 
 
+setInterval(deleteSessions, 60000)
+
 async function tt(message, name) {
     bot.sendMessage(message.chat.id, await finedText('phone')).then(() => {
-        answerCallbacks[message.chat.id] = async(answer) => {
+
+        let date = new Date().getTime();
+        let func = async(answer) => {
             let phone = answer.text;
             //375447284729
             let reg = /^\d{12}$/;
@@ -178,36 +197,44 @@ async function tt(message, name) {
                 tt(message, name)
             } else {
                 await addUser({ id: message.chat.id, name: name, phone: phone });
-                // bot.sendMessage(message.chat.id, name + phone + " saved!");
-                //sendButtonLink(message);
                 games(message);
             }
         }
+        answerCallbacks[message.chat.id] = { date: date, func: func }
     });
 }
 
 
 
-bot.onText(/start/, async function(message, match) {
-    console.log('2')
+bot.onText(/\/start/, async function(message, match) {
+    //console.log('2')
     bot.sendMessage(message.chat.id, await finedText('/start')).then(() => {
-        answerCallbacks[message.chat.id] = (answer) => {
+        let date = new Date().getTime();
+        let func = (answer) => {
             var name = answer.text;
             tt(message, name);
         }
+
+
+        answerCallbacks[message.chat.id] = { date: date, func: func }
+        console.log(answerCallbacks[message.chat.id])
+
+
     });
 });
 
 
 bot.on('message', async function(message) {
-    console.log(`message = ${message.text}`)
+    if (message.text == '/start') {
+        delete answerCallbacks[message.chat.id];
+    }
     var callback = answerCallbacks[message.chat.id];
-    console.log(`message=` + message.chat.id)
-    console.log(callback)
-    console.log(answerCallbacks)
+
+    console.log(' calbak' + callback)
+
     if (callback) {
         delete answerCallbacks[message.chat.id];
-        return callback(message);
+        return callback.func(message);
 
     } else
     if (message.text != '/start') {
@@ -215,44 +242,14 @@ bot.on('message', async function(message) {
         bot.sendMessage(message.chat.id, await finedText(message.text), { disable_web_page_preview: true });
         active = await Users.findAll({ where: { id: message.chat.id }, raw: true });
         active = active[0].active;
-        console.log(active)
+        //console.log(active)
         Users.update({ active: ++active }, {
             where: {
                 id: message.chat.id
             }
         })
-
-
-
-
     }
-
 });
 
 
-async function sendMessages(text) {
-
-    Users.findAll({ raw: true })
-        .then(user => {
-            console.log(user.forEach(element => {
-                try {
-                    bot.sendMessage(element.id, text);
-                } catch {}
-
-            }))
-
-        })
-}
-
-async function sendMessagesUsers(arr, text) {
-
-    arr.forEach(item => {
-        bot.sendMessage(item, text);
-    })
-
-
-
-
-
-
-}
+module.exports.bot = bot;

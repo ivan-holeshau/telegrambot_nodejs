@@ -3,22 +3,16 @@ let listSmiles = ['😊', '🔥', '❤', '😁', '👍', '😎', '😉', '😇',
 document.addEventListener('click', function(e) {
     if (e.target.id.indexOf('x') == 0)
         sends();
-    if (e.target.id.indexOf('r') == 0)
-        updateCommand(e.target.id.slice(1));
-    if (e.target.id.indexOf('d') == 0)
-        deleteCommand(e.target.id.slice(1));
-    if (e.target.id.indexOf('c') == 0)
-        cancelEditElement(e.target.id.slice(1));
-    if (e.target.id.indexOf('s') == 0 && e.target.id.indexOf('m') != 1)
-        saveEditElement(e.target.id.slice(1));
+
+
     if (e.target.id.indexOf('s') == 0 && e.target.id.indexOf('m') == 1)
         insertSmile(e.target.id.slice(0));
     if (e.target.id.indexOf('i') == 0 && e.target.id.indexOf('S') == 2)
         showSmile(e.target.id.slice(7));
-    if (e.target.id.indexOf('check') > -1)
-        taskList.finishedTask(e.target.id.slice(5));
-    if (e.target.id == 'addCommand')
-        addCommand();
+    // if (e.target.id.indexOf('check') > -1)
+    //     taskList.finishedTask(e.target.id.slice(5));
+    // if (e.target.id == 'addCommand')
+    //     addCommand();
 
 });
 
@@ -181,7 +175,7 @@ async function onLoadList() {
         let tr = document.createElement('tr');
         let td = `
         <td>${item.name}</td>
-        <td>${item.hone}</td>
+        <td>${item.phone}</td>
         <td>${item.date}</td>
         <td>${item.id}</td>
         <td>${item.active}</td>
@@ -190,7 +184,6 @@ async function onLoadList() {
         </td>
     `;
         tr.innerHTML = td;
-
 
         bodyt.append(tr);
     });
